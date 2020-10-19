@@ -37,7 +37,7 @@ int main()
     for (int i = 0; i < n; ++i)
         cin >> nums[i];
     segregateNegativesPositives(nums, n);
-    for (int x : nums)
+    for (int x: nums)
         cout << x << " ";
     return 0;
 }
