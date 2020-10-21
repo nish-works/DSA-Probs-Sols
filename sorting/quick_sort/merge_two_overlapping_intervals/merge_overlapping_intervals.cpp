@@ -78,7 +78,7 @@ vector<vector<int> > merge1(vector<vector<int> > &intervals)
 // Modifying the original array
 vector<vector<int> > merge2(vector<vector<int> > &intervals)
 {
-    if (intervals.size() == 0)
+    if (intervals.size() <= 1)
         return intervals;
 
     sort(intervals.begin(), intervals.end());
