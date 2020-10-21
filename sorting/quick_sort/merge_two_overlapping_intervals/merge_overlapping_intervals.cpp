@@ -10,40 +10,38 @@ vector<vector<int> > merge(vector<vector<int> > &intervals)
     for (int i = 0; i < n;)
     {
         int flag = 0;
-        if (intervals[i].size())
+        if (!intervals[i].size())
         {
-            for (int j = 0; j < n; ++j)
+            ++i;
+            continue;
+        }
+        for (int j = 0; j < n; ++j)
+        {
+            if (i == j || !intervals[j].size())
+                continue;
+            int minval = min(intervals[i][1], intervals[j][1]);
+            if (minval == intervals[i][1])
             {
-                if (i != j)
+                if (minval >= intervals[j][0] && minval <= intervals[j][1])
                 {
-                    if (intervals[j].size())
-                    {
-                        int minval = min(intervals[i][1], intervals[j][1]);
-                        if (minval == intervals[i][1])
-                        {
-                            if (minval >= intervals[j][0] && minval <= intervals[j][1])
-                            {
-                                intervals[i][0] = min(intervals[i][0], intervals[j][0]);
-                                intervals[i][1] = max(intervals[i][1], intervals[j][1]);
-                                intervals[j].clear();
-                                flag = 1;
-                            }
-                        }
-                        else if (minval == intervals[j][1])
-                        {
-                            if (minval >= intervals[i][0] && minval <= intervals[i][1])
-                            {
-                                intervals[i][0] = min(intervals[i][0], intervals[j][0]);
-                                intervals[i][1] = max(intervals[i][1], intervals[j][1]);
-                                intervals[j].clear();
-                                flag = 1;
-                            }
-                        }
-                        else
-                            flag = 0;
-                    }
+                    intervals[i][0] = min(intervals[i][0], intervals[j][0]);
+                    intervals[i][1] = max(intervals[i][1], intervals[j][1]);
+                    intervals[j].clear();
+                    flag = 1;
                 }
             }
+            else if (minval == intervals[j][1])
+            {
+                if (minval >= intervals[i][0] && minval <= intervals[i][1])
+                {
+                    intervals[i][0] = min(intervals[i][0], intervals[j][0]);
+                    intervals[i][1] = max(intervals[i][1], intervals[j][1]);
+                    intervals[j].clear();
+                    flag = 1;
+                }
+            }
+            else
+                flag = 0;
         }
         if (flag == 0)
             i = i + 1;
