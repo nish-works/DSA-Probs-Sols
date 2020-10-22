@@ -2,15 +2,16 @@
 using namespace std;
 
 // For non negative integers
-// TC: O(n+k) AS: O(n+k)
+// TC: O(n+k)
+// AS: O(n+k)
 void countingSort(vector<int> &arr, int n, int k)
 {
-    vector<int> count(n, 0), output(n, 0);
+    vector<int> count(k, 0), output(n, 0);
     for (int i = 0; i < n; ++i)
         ++count[arr[i]];
-    for (int i = 1; i < n; ++i)
+    for (int i = 1; i < k; ++i)
         count[i] += count[i - 1];
-    for (int i = 0; i < n; ++i)
+    for (int i = 0; i < k; ++i)
         count[i] = count[i] - 1;
     for (int i = 0; i < n; ++i)
     {
