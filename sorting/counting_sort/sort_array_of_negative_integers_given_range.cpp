@@ -15,7 +15,7 @@ void countingSort(vector<int> &arr, int n, int min, int max)
         count[i] += count[i - 1];
     for (int i = 0; i < range; ++i)
         count[i] = count[i] - 1;
-    for (int i = 0; i < n; ++i)
+    for (int i = n - 1; i >= 0; --i) // To ensure stability
     {
         output[count[arr[i] - min]] = arr[i];
         --count[arr[i] - min];
